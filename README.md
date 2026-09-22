@@ -1,8 +1,10 @@
 # server-inventory-api
-FastAPI와 PostgreSQL을 이용한 서버 인벤토리 관리 REST API입니다.
+FastAPI와 PostgreSQL을 이용한 서버 인벤토리 관리 REST API입니다.  
+
 Docker Compose를 사용하여 API와 PostgreSQL을 컨테이너 환경에서 실행합니다.
 
-Tech Stack
+## Tech Stack
+
 * Python 3.13
 * FastAPI / Uvicorn
 * PostgreSQL 17
@@ -11,8 +13,9 @@ Tech Stack
 
 Python 패키지 버전은 requirements.txt에서 관리합니다.
 
-Architecture
+## Architecture
 
+```text
 Client
   │ HTTP :8000
   ▼
@@ -23,6 +26,7 @@ PostgreSQL :5432
   │
   ▼
 Docker Volume
+```
 
 FastAPI와 PostgreSQL은 Docker Compose의 동일한 네트워크에서 통신하며, DB 접속 정보는 환경변수로 관리합니다.
 
@@ -37,16 +41,26 @@ FastAPI와 PostgreSQL은 Docker Compose의 동일한 네트워크에서 통신�
 | DELETE | `/servers/{server_id}` | 서버 삭제 |
 
 ## Run
-`docker compose up -d --build`
+```bash
+docker compose up -d --build
+```
 
-## 컨테이너 확인
-`docker compose ps`
+### 컨테이너 확인
+```bash
+docker compose ps
+```
 
-## API문서
-`http://localhost:8000/docs`
+### API문서
+```bash
+http://localhost:8000/docs
+```
 
-## 로그 확인
-`docker compose logs -f api`
+로그 확인
+```bash
+docker compose logs -f api
+```
 
-## 종료
-`docker compose down`
+종료
+```bash
+docker compose down
+```
