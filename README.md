@@ -36,17 +36,17 @@ FastAPI와 PostgreSQL은 Docker Compose의 동일한 네트워크에서 통신�
 | PUT | `/servers/{server_id}` | 서버 정보 수정 |
 | DELETE | `/servers/{server_id}` | 서버 삭제 |
 
-Run
-docker compose up -d --build
+## Run
+`docker compose up -d --build`
 
-컨테이너 확인:
-docker compose ps
+## 컨테이너 확인
+`docker compose ps`
 
-API문서:
-http://localhost:8000/docs
+## API문서
+`http://localhost:8000/docs`
 
-로그 확인:
-docker compose logs -f api
+## 로그 확인
+`docker compose logs -f api`
 
-종료:
-docker compose down
+## 종료
+`docker compose down`
