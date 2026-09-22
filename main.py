@@ -4,14 +4,17 @@ from psycopg.rows import dict_row
 from pydantic import BaseModel
 import os
 
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 def get_db_connection():
     return psycopg.connect(
-        host='localhost',
+        host=DB_HOST,
         port=5432,
-        dbname='app_db',
-        user='postgres',
+        dbname=DB_NAME,
+        user=DB_USER,
         password=DB_PASSWORD,
         row_factory=dict_row
     )
