@@ -38,6 +38,9 @@ pipeline {
         }
 
         stage('Build Image') {
+            when {
+                environment name: 'APP_CHANGED', value: 'true'
+            }   
             steps {
                 sh '''
                     podman build \
@@ -47,6 +50,9 @@ pipeline {
         }
 
         stage('Push Image') {
+            when {
+                environment name: 'APP_CHANGED', value: 'true'
+            } 
             steps {
                 withCredentials([
                     usernamePassword(
@@ -69,6 +75,9 @@ pipeline {
         }
 
         stage('Update GitOps Repository') {
+            when {
+                environment name: 'APP_CHANGED', value: 'true'
+            } 
             steps {
                 withCredentials([
                     usernamePassword(
