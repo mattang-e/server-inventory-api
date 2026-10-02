@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Test') {
+        stage('Checkout') {
             steps {
                 sh 'echo "Git checkout successful"'
                 sh 'whoami'
