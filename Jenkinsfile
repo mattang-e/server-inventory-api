@@ -5,6 +5,7 @@ pipeline {
         HARBOR_REGISTRY = 'harbor.lab.local'
         HARBOR_PROJECT = 'server-inventory'
         IMAGE_NAME = 'server-inventory-api'
+        APP_CHANGED = 'false'
     }
 
     stages {
@@ -14,6 +15,25 @@ pipeline {
                 sh 'whoami'
                 sh 'pwd'
                 sh 'ls -al'
+            }
+        }
+        stage('Detect Changes') {
+            steps {
+                script {
+                    def changedFiles = sh(
+                        script: 'git diff --name-only HEAD^ HEAD',
+                        returnStdout: true
+                    ).trim()
+                    echo "Changed files:\n${changedFiles}"
+                    if (changedFiles.split('\n').any {
+                        it == 'main.py' ||
+                        it == 'requirements.txt' ||
+                        it == 'Dockerfile'
+                    }) {
+                        env.APP_CHANGED = 'true'
+                    }
+                    echo "APP_CHANGED=${env.APP_CHANGED}"
+                }
             }
         }
 
